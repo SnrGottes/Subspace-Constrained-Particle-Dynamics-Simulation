@@ -1,13 +1,12 @@
-#try:
-import gui, sys
-from PyQt6.QtWidgets import QApplication
+import sys
+from pathlib import Path
 
-app = QApplication(sys.argv)
-    
-window = gui.MainWindow()
-window.show()
-    
-sys.exit(app.exec())
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-#except Exception as e:
-#    print(e)
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from src.gui.app import run_application
+
+if __name__ == "__main__":
+    run_application()

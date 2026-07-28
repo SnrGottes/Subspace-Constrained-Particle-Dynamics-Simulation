@@ -12,9 +12,9 @@ class DataSpinBox(QDoubleSpinBox):
     def __init__(self, min_v: float, max_v: float, default: float, step: float,  parent=None):
         super().__init__(parent)
 
-        self.setRange(min=min_v, max=max_v)
-        self.setValue(val=default)
-        self.setSingleStep(val=step)
+        self.setRange(min_v, max_v)
+        self.setValue(default)
+        self.setSingleStep(step)
         self.setDecimals(settings['spin']['decimals'])
 
 class BaseButton(QPushButton):

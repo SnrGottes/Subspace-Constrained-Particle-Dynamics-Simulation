@@ -1,0 +1,12 @@
+QWidget#sub_container {
+    border: 2px solid #b0b0b0;
+}
+QLabel#title {
+    font-size:20px;
+}
+QLabel#data_label {
+    font-size: 10px;
+}
+QLabel#X_label {
+    font-size: 20px;
+}

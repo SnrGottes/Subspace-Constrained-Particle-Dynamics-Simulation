@@ -1,11 +1,12 @@
 [main_window]
 width = 1400
 height = 600
-title: 'Subspace Constrained Particle Dynamics Simulation'
+title = 'Subspace Constrained Particle Dynamics Simulation'
 
 [panels]
 side_width = 350
 centr_width = 700
+parm_layout_column = 2
 
 [spin]
 decimals = 4
