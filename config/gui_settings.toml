@@ -1,0 +1,22 @@
+[main_window]
+width = 1400
+height = 600
+title: 'Subspace Constrained Particle Dynamics Simulation'
+
+[panels]
+side_width = 350
+centr_width = 700
+
+[spin]
+decimals = 4
+
+[graph]
+widget_size = 345
+axis_colors = [
+    '#ff0000', 
+    '#ff00ff', 
+    '#00ff00', 
+    '#00ffff', 
+    '#0000ff', 
+    '#ffff00'
+]
