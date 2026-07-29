@@ -84,20 +84,21 @@ class InputPanel(QWidget):
     def get_settings(self):
         data = sim_settings
         for value_name in sim_settings['settings_list']['range_parameters']:
-            min = self.input_double_rows[value_name][1]
-            max = self.input_double_rows[value_name][2]
-
             data['range_parameters'][value_name]['min_range'] = self.input_double_rows[value_name][1].value()
             data['range_parameters'][value_name]['max_range'] = self.input_double_rows[value_name][2].value()
 
         for value_name in sim_settings['settings_list']['parameters']:
-            value = self.input_single_rows[value_name][1]
-            data['parameters'][value_name]['value'] = value.value()
+            data['parameters'][value_name]['value'] = self.input_single_rows[value_name][1]()
 
         return data
     
     def reset_clicked(self):
-        pass
+        for value_name in sim_settings['settings_list']['range_parameters']:
+            self.input_double_rows[value_name][1].setValue(sim_settings['range_parameters'][value_name]['min_range'])
+            self.input_double_rows[value_name][2].setValue(sim_settings['range_parameters'][value_name]['max_range'])
+
+        for value_name in sim_settings['settings_list']['parameters']:
+            self.input_single_rows[value_name][1].setValue(sim_settings['parameters'][value_name]['value'])
 
     def save_clicked(self):
         data = self.get_settings()
