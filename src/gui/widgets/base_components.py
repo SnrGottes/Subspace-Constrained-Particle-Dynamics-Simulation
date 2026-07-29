@@ -21,7 +21,7 @@ class BaseButton(QPushButton):
     def __init__(self, text: str,  parent=None):
         super().__init__(parent)
 
-        self.setText(text=text)
+        self.setText(text)
         self.setObjectName('standart_button')
 
 class ColorDisplay(QWidget):

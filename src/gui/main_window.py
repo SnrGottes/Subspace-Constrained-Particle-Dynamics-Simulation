@@ -6,6 +6,8 @@ from PyQt6.QtWidgets import (
 )
 from src.config_loader import ConfigLoader
 from src.gui.widgets.input_panel import InputPanel
+from src.gui.widgets.center_panel import CenterPanel
+from src.gui.widgets.inspector_panel import InspectorPanel
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -27,7 +29,9 @@ class MainWindow(QMainWindow):
         layout.setSpacing(0)
         layout.setContentsMargins(0, 0, 0, 0)
 
-        input_panel = InputPanel()
+        input_panel, central_panel, inspector_panel = InputPanel(), CenterPanel(), InspectorPanel()
         layout.addWidget(input_panel)
+        layout.addWidget(central_panel)
+        layout.addWidget(inspector_panel)
 
         self.setCentralWidget(widget)
