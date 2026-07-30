@@ -5,14 +5,14 @@ title = 'Subspace Constrained Particle Dynamics Simulation'
 
 [panels]
 side_width = 350
-centr_width = 700
+center_width = 700
 parm_layout_column = 2
 
 [spin]
 decimals = 4
 
 [graph]
-widget_size = 345
+quantity_graph_widgets = 2
 axis_colors = [
     '#ff0000', 
     '#ff00ff', 

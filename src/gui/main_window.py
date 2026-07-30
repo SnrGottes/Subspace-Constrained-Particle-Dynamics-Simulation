@@ -30,8 +30,9 @@ class MainWindow(QMainWindow):
         layout.setContentsMargins(0, 0, 0, 0)
 
         input_panel, central_panel, inspector_panel = InputPanel(), CenterPanel(), InspectorPanel()
-        layout.addWidget(input_panel)
-        layout.addWidget(central_panel)
-        layout.addWidget(inspector_panel)
+
+        for panel in [input_panel, central_panel, inspector_panel]:
+            panel.setObjectName('sub_container')
+            layout.addWidget(panel)
 
         self.setCentralWidget(widget)

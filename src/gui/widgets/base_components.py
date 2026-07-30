@@ -35,24 +35,24 @@ class ColorDisplay(QWidget):
         layout.addWidget(label)
 
 class GraphWidget(pg.PlotWidget):
-    def __init__(self, x_axis_idx: int, y_axis_idx: int, parent=None):
+    def __init__(self, widget_size: int, x_axis_idx: int, y_axis_idx: int, parent=None):
         super().__init__(parent)
         self.x_idx = x_axis_idx
         self.y_idx = y_axis_idx
 
-        self._configure_plot()
+        self._configure_plot(int(widget_size))
 
         self.scatter = pg.ScatterPlotItem(pxMode=True, hoverable=True)
         self.addItem(self.scatter)
 
         self.scatter.sigClicked.connect(self._on_points_clicked)
 
-    def _configure_plot(self):
+    def _configure_plot(self, widget_size):
         self.showGrid(x=True, y=True)
         self.setTitle('')
-        self.setFixedSize(
-            settings['graph']['widget_size'], 
-            settings['graph']['widget_size']
-        )
+        self.setFixedSize(widget_size, widget_size)
         self.setLabel('left', f'Axis {self.y_idx}')
         self.setLabel('bottom', f'Axis {self.x_idx}')
+
+    def _on_points_clicked(self):
+        pass
