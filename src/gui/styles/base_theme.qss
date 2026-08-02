@@ -1,11 +1,11 @@
-QWidget#sub_container {
-    border: 20px solid #b0b0b0;
-}
 QLabel#title {
     font-size:20px;
 }
+QLabel#heading {
+    font-size: 17px;
+}
 QLabel#data_label {
-    font-size: 10px;
+    font-size: 12px;
 }
 QLabel#X_label {
     font-size: 20px;
@@ -13,6 +13,7 @@ QLabel#X_label {
 QLabel#axis_label {
     font-size: 20px
 }
+
 QPushButton#base_button {
 
 }

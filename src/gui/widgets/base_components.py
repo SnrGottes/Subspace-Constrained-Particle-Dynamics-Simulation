@@ -3,7 +3,7 @@ import numpy as np
 from PyQt6.QtCore import pyqtSignal, Qt
 from PyQt6.QtWidgets import (
     QMainWindow, QVBoxLayout, QHBoxLayout, QGridLayout,
-    QLabel, QWidget, QPushButton, QDoubleSpinBox
+    QLabel, QWidget, QPushButton, QDoubleSpinBox, QAbstractSpinBox
 )
 from src.config_loader import ConfigLoader
 
@@ -14,10 +14,20 @@ class DataSpinBox(QDoubleSpinBox):
     def __init__(self, min_v: float, max_v: float, default: float, step: float,  parent=None):
         super().__init__(parent)
 
+        dec_str = str(step).split(".")
+        count = len(dec_str) - 1
+
         self.setRange(min_v, max_v)
         self.setValue(default)
         self.setSingleStep(step)
         self.setDecimals(gui_settings['spin']['decimals'])
+        self.setDecimals(count)
+        self.setStyleSheet(self.styleSheet() + '''
+            QDoubleSpinBox::up-button, QDoubleSpinBox::down-button {
+            width: 8px;
+            height: 10px;
+            }
+        ''')
 
 class BaseButton(QPushButton):
     def __init__(self, text: str,  parent=None):

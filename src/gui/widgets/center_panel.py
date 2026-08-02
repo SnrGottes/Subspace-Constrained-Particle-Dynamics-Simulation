@@ -20,6 +20,7 @@ class CenterPanel(QWidget):
         button_layout = QGridLayout()
 
         axis_layout.setContentsMargins(0, 0, 0, 0)
+        axis_layout.addSpacing(10)
 
         axis_displayed, self.graph_widgets, self.axis_selection_widgets = 1, [], []
         for i in range(gui_settings['graph']['quantity_graph_widgets']):
