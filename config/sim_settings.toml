@@ -1,9 +1,13 @@
 [settings_list]
 constans = []
-parameters = [ "particle_count",]
 range_parameters = [ "velocity", "mass",]
+parameters = [ "particle_count",]
 
-[constans]
+[constans.axis_count]
+value = 4
+min_value = 2
+max_value = 6
+step = 1
 
 [range_parameters.velocity]
 min_range = 1.5000000000000004

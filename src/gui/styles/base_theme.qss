@@ -1,5 +1,5 @@
 QWidget#sub_container {
-    border: 2px solid #b0b0b0;
+    border: 20px solid #b0b0b0;
 }
 QLabel#title {
     font-size:20px;
@@ -9,4 +9,18 @@ QLabel#data_label {
 }
 QLabel#X_label {
     font-size: 20px;
+}
+QLabel#axis_label {
+    font-size: 20px
+}
+QPushButton#base_button {
+
+}
+QPushButton#axis_button {
+    background: none;
+    border: none;
+    font-size: 40px;
+}
+QPushButton#axis_button:hover {
+    font-size: 50px;
 }
