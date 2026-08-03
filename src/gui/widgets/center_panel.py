@@ -1,8 +1,9 @@
 from PyQt6.QtWidgets import (QVBoxLayout, QGridLayout, QHBoxLayout, QLabel, QWidget)
 from src.config_loader import ConfigLoader
-from src.gui.widgets.base_components import GraphWidget, AxisSelectionWidget
+from src.gui.widgets.base_components import GraphWidget, AxisSelectionWidget, ColorDisplayWidget
 
 gui_settings = ConfigLoader.get_gui_settings()
+sim_settings = ConfigLoader.get_sim_settings()
 
 class CenterPanel(QWidget):
     def __init__(self, parent=None):
@@ -18,9 +19,13 @@ class CenterPanel(QWidget):
         axis_layout = QHBoxLayout()
         color_display_layout = QHBoxLayout()
         button_layout = QGridLayout()
+        
+        graph_layout.setContentsMargins(0, 0, 0, 0)
+        graph_layout.setSpacing(0)
 
         axis_layout.setContentsMargins(0, 0, 0, 0)
-        axis_layout.addSpacing(10)
+
+        color_display_layout.setContentsMargins(0, 5, 0, 5)
 
         axis_displayed, self.graph_widgets, self.axis_selection_widgets = 1, [], []
         for i in range(gui_settings['graph']['quantity_graph_widgets']):
@@ -47,6 +52,15 @@ class CenterPanel(QWidget):
             ])
             axis_layout.addWidget(axis_selection_widget_1)
             axis_layout.addWidget(axis_selection_widget_2)
+
+        i, self.color_display_widgets = 1, {}
+        for color in gui_settings['graph']['axis_colors']:
+            color_display_widget = ColorDisplayWidget(color, i)
+
+            color_display_layout.addWidget(color_display_widget)
+            self.color_display_widgets.update({f'X{i}': color_display_widget})
+            color_display_layout.addSpacing(10)
+            i += 1
 
         layout.addLayout(graph_layout)
         layout.addLayout(axis_layout)

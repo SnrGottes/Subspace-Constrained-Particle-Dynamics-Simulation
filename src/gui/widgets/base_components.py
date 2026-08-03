@@ -43,15 +43,21 @@ class AxisButton(QPushButton):
         self.setText(text)
         self.setObjectName('axis_button')
 
-class ColorDisplay(QWidget):
+class ColorDisplayWidget(QWidget):
     def __init__(self, color: str, axis_number: int, parent=None):
         super().__init__(parent)
 
-        self.setStyleSheet(f'background-color: {color}')
+        layout = QHBoxLayout()
+        label = QLabel(f'X<sub>{axis_number}</sub>:')
+        widget = QWidget()
 
-        layout = QHBoxLayout(self)
-        label = QLabel(f'X<sub>{axis_number}</sub>')
+        layout.setContentsMargins(0,0,0,0)
+        label.setObjectName('X_label')
+        widget.setStyleSheet(f'background-color: {color}')
+
         layout.addWidget(label)
+        layout.addWidget(widget)
+        self.setLayout(layout)
 
 class GraphWidget(pg.PlotWidget):
     def __init__(self, widget_size: int, x_axis_idx: int, y_axis_idx: int, parent=None):
@@ -91,6 +97,8 @@ class AxisSelectionWidget(QWidget):
     def __init__(self, axis: int, widget_size: int, parent=None):
         super().__init__(parent)
 
+        self.setFixedHeight(2)
+
         self.layout = QHBoxLayout()
         self.layout.setContentsMargins(5, 0, 5, 0)
         self.setFixedHeight(int(widget_size/2))
@@ -107,7 +115,7 @@ class AxisSelectionWidget(QWidget):
         self.right_button.clicked.connect(self.right_clicked)
 
         for widget in [self.left_button, self.label, self.right_button]:
-            self.layout.addWidget(widget, alignment=Qt.AlignmentFlag.AlignCenter)
+            self.layout.addWidget(widget, alignment=Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignHCenter)
 
         self.setLayout(self.layout)
 

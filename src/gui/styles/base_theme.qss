@@ -11,7 +11,7 @@ QLabel#X_label {
     font-size: 20px;
 }
 QLabel#axis_label {
-    font-size: 20px
+    font-size: 30px
 }
 
 QPushButton#base_button {
@@ -20,8 +20,8 @@ QPushButton#base_button {
 QPushButton#axis_button {
     background: none;
     border: none;
-    font-size: 40px;
+    font-size: 30px;
 }
 QPushButton#axis_button:hover {
-    font-size: 50px;
+    font-size: 40px;
 }
