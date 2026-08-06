@@ -34,6 +34,7 @@ class BaseButton(QPushButton):
         super().__init__(parent)
 
         self.setText(text)
+        self.setMinimumHeight(40)
         self.setObjectName('base_button')
 
 class AxisButton(QPushButton):

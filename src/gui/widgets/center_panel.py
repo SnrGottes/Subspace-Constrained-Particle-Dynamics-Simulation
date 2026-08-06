@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import (QVBoxLayout, QGridLayout, QHBoxLayout, QLabel, QWidget)
 from src.config_loader import ConfigLoader
-from src.gui.widgets.base_components import GraphWidget, AxisSelectionWidget, ColorDisplayWidget
+from src.gui.widgets.base_components import GraphWidget, AxisSelectionWidget, ColorDisplayWidget, BaseButton
 
 gui_settings = ConfigLoader.get_gui_settings()
 sim_settings = ConfigLoader.get_sim_settings()
@@ -12,13 +12,13 @@ class CenterPanel(QWidget):
 
         center_widget = QWidget()
         layout = QVBoxLayout(center_widget)
-        layout.setContentsMargins(0, 0, 0, 0)
+        #layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(0)
 
         graph_layout = QHBoxLayout()
         axis_layout = QHBoxLayout()
         color_display_layout = QHBoxLayout()
-        button_layout = QGridLayout()
+        button_layout = QHBoxLayout()
         
         graph_layout.setContentsMargins(0, 0, 0, 0)
         graph_layout.setSpacing(0)
@@ -27,7 +27,10 @@ class CenterPanel(QWidget):
 
         color_display_layout.setContentsMargins(0, 5, 0, 5)
 
-        axis_displayed, self.graph_widgets, self.axis_selection_widgets = 1, [], []
+        button_layout.setContentsMargins(0, 0, 0, 0)
+        button_layout.setSpacing(0)
+
+        axis_displayed, self.graph_widgets, self.axis_selection_widgets = 1, {}, {}
         for i in range(gui_settings['graph']['quantity_graph_widgets']):
             graph_size = gui_settings['panels']['center_width'] / gui_settings['graph']['quantity_graph_widgets']
 
@@ -43,13 +46,13 @@ class CenterPanel(QWidget):
 
             axis_displayed += 2
 
-            self.graph_widgets.append(graph_widget)
+            self.graph_widgets.update({i: graph_widget})
             graph_layout.addWidget(graph_widget)
 
-            self.axis_selection_widgets.append([
+            self.axis_selection_widgets.update({i: [
                 axis_selection_widget_1,
                 axis_selection_widget_2
-            ])
+            ]})
             axis_layout.addWidget(axis_selection_widget_1)
             axis_layout.addWidget(axis_selection_widget_2)
 
@@ -62,10 +65,42 @@ class CenterPanel(QWidget):
             color_display_layout.addSpacing(10)
             i += 1
 
+        self.pause_button = BaseButton('pause')
+        self.initialize_button = BaseButton('start')
+
+        self.pause = self.initialize = False
+
+        self.pause_button.setEnabled(False)
+
+        self.pause_button.clicked.connect(self.pause_clicked)
+        self.initialize_button.clicked.connect(self.initialize_clicked)
+
+        button_layout.addWidget(self.pause_button)
+        button_layout.addWidget(self.initialize_button)
+
         layout.addLayout(graph_layout)
         layout.addLayout(axis_layout)
         layout.addStretch()
         layout.addLayout(color_display_layout)
+        layout.addSpacing(5)
         layout.addLayout(button_layout)
 
         self.setLayout(layout)
+
+    def pause_clicked(self):
+        if self.pause:
+            self.pause_button.setText('pause')
+            self.pause = False
+        else:
+            self.pause_button.setText('continue')
+            self.pause = True
+
+    def initialize_clicked(self):
+        if self.initialize:
+            self.initialize_button.setText('start')
+            self.pause_button.setEnabled(False)
+            self.initialize = False
+        else:
+            self.initialize_button.setText('remove')
+            self.pause_button.setEnabled(True)
+            self.initialize = True
